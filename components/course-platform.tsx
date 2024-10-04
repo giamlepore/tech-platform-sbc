@@ -25,12 +25,12 @@ interface CustomSession extends Session {
 
 const modules = [
   {
-    title: 'O seu primeiro módulo aqui',
+    title: 'Módulo 1: Fundamentos',
     courses: [
-      { title: 'Aula #001 → O que gostaria de saber antes? Parte 01', duration: '10:00', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1008575104?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'Aula #002 → O que gostaria de saber antes? Parte 02', duration: '10:00', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1008575201?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'EXTRA #001: Ferramentas para começar', duration: '14:00', image: '/ferramentas.jpg', video: 'https://player.vimeo.com/video/1008577242?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'EXTRA #002: Criando um (belo) site em 26 minutos', duration: '26:00', image: '/vídeo.png', video: 'https://player.vimeo.com/video/1009311054?badge=0&amp;autopause=0&amp' },
+      { title: 'Aula #001 → Expectativas Módulo 1', duration: '03:46', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1016276753?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #002 → O que é a internet?', duration: '13:57', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1016265764?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #003 → Tecnologias por trás da internet', duration: '23:43', image: '/ferramentas.jpg', video: 'https://player.vimeo.com/video/1016265897?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #004 → Banda e Latência', duration: '05:13', image: '/vídeo.png', video: 'https://player.vimeo.com/video/1016266097?badge=0&amp;autopause=0&amp' },
     ],
     tasks: [
       { title: 'Escolha a ferramenta que você vai documentar seus aprendizados. (Coda, Notion, Trello, Asana são algumas possibilidades)', completed: false },
@@ -434,10 +434,34 @@ function CoursePlatformContent() {
   
   if (!session) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground">
-        <h1 className="text-3xl font-bold mb-4">Welcome to SBC Technical Product Manager Training</h1>
-        <p className="mb-8">Please sign in to access the course content.</p>
-        <Button onClick={() => signIn('google')}>Sign In with Google</Button>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-200">
+        <h1 className="text-4xl font-bold mb-8">SBC</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full px-4">
+          <div className="bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between transform hover:scale-105">
+            <div>
+              <h2 className="text-2xl font-semibold mb-4">Technical Product Manager Training</h2>
+              <p className="text-gray-400 mb-4">Access your personalized course content and track your progress.</p>
+            </div>
+            <Button 
+              onClick={() => signIn('google')} 
+              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded self-end transition-colors duration-300"
+            >
+              Acessar curso
+            </Button>
+          </div>
+          <div className="bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between transform hover:scale-105">
+            <div>
+              <h2 className="text-2xl font-semibold mb-4">Como criar um produto do zero, sem sorte</h2>
+              <p className="text-gray-400 mb-4">Explore our course offerings and get a sneak peek of what's inside.</p>
+            </div>
+            <Button 
+              onClick={() => window.location.href = 'https://sbc-v6.vercel.app'}
+              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded self-end transition-colors duration-300"
+            >
+              Acessar curso
+            </Button>
+          </div>
+        </div>
       </div>
     )
   }
