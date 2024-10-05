@@ -40,7 +40,7 @@ const modules = [
     ]
   },
   {
-    title: 'Módulo 02, em breve',
+    title: 'Módulo 02: Em breve',
     courses: [
       { title: 'Em construção', duration: '10:15', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
       { title: 'Muito em breve, por aqui', duration: '15:30', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
@@ -52,7 +52,7 @@ const modules = [
     ]
   },
   {
-    title: 'Módulo 03, mais perto do que você imagina',
+    title: 'Módulo 03: Mais perto do que você imagina',
     courses: [
       { title: 'Por essa aula, estou ansioso', duration: '25:00', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
       { title: 'Essa daqui, você nem imagina', duration: '18:20', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
@@ -64,7 +64,7 @@ const modules = [
     ]
   },
   {
-    title: 'Módulo 04, mais perto do que você imagina',
+    title: 'Módulo 04: Chegando',
     courses: [
       { title: 'Por essa aula, estou ansioso', duration: '25:00', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
       { title: 'Essa daqui, você nem imagina', duration: '18:20', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
@@ -142,6 +142,12 @@ function CoursePlatformContent() {
     }
     setLastUncompletedCourse(null)
   }
+
+  const getModuleProgress = (moduleIndex: number) => {
+    const moduleCompletedCourses = completedCourses[moduleIndex] || [];
+    const totalCoursesInModule = modules[moduleIndex].courses.length;
+    return (moduleCompletedCourses.length / totalCoursesInModule) * 100;
+  };
 
   const handleComplete = async () => {
     setShowCheckAnimation(true)
@@ -256,15 +262,15 @@ function CoursePlatformContent() {
       <div className="mt-6 space-y-6">
         {previousVideos.length > 0 && (
           <div>
-            <h3 className="text-xl font-bold mb-4">Previous in this module:</h3>
+            <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Previous in this module:</h3>
             <ul className="space-y-2">
               {previousVideos.map((course, index) => (
-                <li key={index} className="flex items-center space-x-2 p-2 bg-card rounded-lg cursor-pointer hover:bg-accent" onClick={() => {
+                <li key={index} className="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
                   setCurrentCourse(index)
                 }}>
-                  <Play className="h-4 w-4" />
-                  <span>{course.title}</span>
-                  <span className="text-sm text-muted-foreground ml-auto">{course.duration}</span>
+                  <Play className="h-4 w-4 text-blue-500" />
+                  <span className="text-gray-200 font-sans">{course.title}</span>
+                  <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span>
                   {completedCourses[currentModule]?.includes(index) && (
                     <Check className="h-4 w-4 text-green-500" />
                   )}
@@ -275,15 +281,15 @@ function CoursePlatformContent() {
         )}
         {nextVideos.length > 0 && (
           <div>
-            <h3 className="text-xl font-bold mb-4">Next in this module:</h3>
+            <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Next in this module:</h3>
             <ul className="space-y-2">
               {nextVideos.map((course, index) => (
-                <li key={index} className="flex items-center space-x-2 p-2 bg-card rounded-lg cursor-pointer hover:bg-accent" onClick={() => {
+                <li key={index} className="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
                   setCurrentCourse(currentCourse + index + 1)
                 }}>
-                  <Play className="h-4 w-4" />
-                  <span>{course.title}</span>
-                  <span className="text-sm text-muted-foreground ml-auto">{course.duration}</span>
+                  <Play className="h-4 w-4 text-blue-500" />
+                  <span className="text-gray-200 font-sans">{course.title}</span>
+                  <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span>
                 </li>
               ))}
             </ul>
@@ -297,8 +303,8 @@ function CoursePlatformContent() {
     return (
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">Shorts</h2>
-          <ChevronRight className="h-6 w-6" />
+          <h2 className="text-2xl font-bold text-gray-200 font-sans">Shorts</h2>
+          <ChevronRight className="h-6 w-6 text-gray-400" />
         </div>
         <div 
           className="flex overflow-x-auto space-x-4 pb-4 cursor-grab"
@@ -321,7 +327,7 @@ function CoursePlatformContent() {
           {shorts.map((short, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-32 bg-card rounded-lg overflow-hidden shadow-sm cursor-pointer"
+              className="flex-shrink-0 w-32 bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
               onClick={() => {
                 setCurrentShort(index)
                 setShowShortVideo(true)
@@ -339,12 +345,12 @@ function CoursePlatformContent() {
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                   <Play className="h-8 w-8 text-white" />
                 </div>
-                <div className="absolute bottom-1 left-1 bg-black bg-opacity-75 text-white text-xs px-1 py-0.5 rounded">
+                <div className="absolute bottom-1 left-1 bg-black bg-opacity-75 text-white text-xs px-1 py-0.5 rounded font-sans">
                   {short.duration}
                 </div>
               </div>
               <div className="p-2">
-                <h3 className="font-semibold text-xs truncate">{short.title}</h3>
+                <h3 className="font-semibold text-xs truncate text-gray-200 font-sans">{short.title}</h3>
               </div>
             </div>
           ))}
@@ -359,7 +365,7 @@ function CoursePlatformContent() {
         {shorts.map((short, index) => (
           <div
             key={index}
-            className="bg-card rounded-lg overflow-hidden shadow-sm cursor-pointer"
+            className="bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
             onClick={() => {
               setCurrentShort(index)
               setShowShortVideo(true)
@@ -377,12 +383,12 @@ function CoursePlatformContent() {
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <Play className="h-12 w-12 text-white" />
               </div>
-              <div className="absolute bottom-2 left-2 bg-black bg-opacity-75 text-white text-xs px-1 py-0.5 rounded">
+              <div className="absolute bottom-2 left-2 bg-black bg-opacity-75 text-white text-xs px-1 py-0.5 rounded font-sans">
                 {short.duration}
               </div>
             </div>
             <div className="p-2">
-              <h3 className="font-semibold text-sm">{short.title}</h3>
+              <h3 className="font-semibold text-sm text-gray-200 font-sans">{short.title}</h3>
             </div>
           </div>
         ))}
@@ -397,25 +403,25 @@ function CoursePlatformContent() {
       const course = chapter.courses[courseIndex]
       return (
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Continue de onde parou</h2>
+          <h2 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Continue de onde parou</h2>
           <div
-            className="bg-card rounded-lg overflow-hidden shadow-sm cursor-pointer"
+            className="bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
             onClick={() => {
               setCurrentModule(moduleIndex)
               setCurrentCourse(courseIndex)
               setShowVideo(true)
             }}
           >
-            <div className="relative aspect-video ">
+            <div className="relative aspect-video">
               <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <Play className="h-12 w-12 text-white" />
               </div>
             </div>
             <div className="p-4">
-              <h3 className="font-semibold text-lg">{course.title}</h3>
-              <p className="text-sm text-muted-foreground">{chapter.title}</p>
-              <p className="text-sm mt-2">{course.duration}</p>
+              <h3 className="font-semibold text-lg text-gray-200 font-sans">{course.title}</h3>
+              <p className="text-sm text-gray-400 font-sans">{chapter.title}</p>
+              <p className="text-sm mt-2 text-gray-400 font-sans">{course.duration}</p>
             </div>
           </div>
         </div>
@@ -467,37 +473,38 @@ function CoursePlatformContent() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col min-h-screen bg-gray-900 text-gray-200">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background border-b">        <div className="flex items-center justify-between px-4 py-2 bg-white">
-          <h1 className="text-2xl font-bold text-black">SBC</h1>
+      <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
+        <div className="flex items-center justify-between px-4 py-2">
+          <h1 className="text-2xl font-bold text-indigo-400 font-sans">SBC</h1>
           <div className="flex-1 mx-4">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-              <Input className="pl-8 w-full" placeholder="Search" />
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Input className="pl-8 w-full bg-gray-700 text-gray-200 border-gray-600" placeholder="Search" />
             </div>
           </div>
-    {session ? (
-      <Avatar onClick={() => signOut()} className="cursor-pointer">
-        <AvatarImage src={session.user.image ?? undefined} alt={session.user.name ?? 'User'} />
-    <AvatarFallback>{session.user.name?.[0] ?? 'U'}</AvatarFallback>
-  </Avatar>
-) : (
-  <Button onClick={() => signIn('google')}>Sign In</Button>
-)}
+          {session ? (
+            <Avatar onClick={() => signOut()} className="cursor-pointer">
+              <AvatarImage src={session.user.image ?? undefined} alt={session.user.name ?? 'User'} />
+              <AvatarFallback>{session.user.name?.[0] ?? 'U'}</AvatarFallback>
+            </Avatar>
+          ) : (
+            <Button onClick={() => signIn('google')} className="bg-indigo-600 hover:bg-indigo-700">Sign In</Button>
+          )}
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto p-4 bg-gray-100 text-black">
+      <main className="flex-1 overflow-auto p-4 bg-gray-900 text-gray-200">
         {showVideo ? (
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">{modules[currentModule].courses[currentCourse].title}</h2>
+            <h2 className="text-3xl font-bold mb-4 font-sans tracking-tight sm:text-2xl">{modules[currentModule].courses[currentCourse].title}</h2>
             <div className="aspect-video bg-black mb-6 rounded-lg overflow-hidden">
               {renderVideoPlayer(modules[currentModule].courses[currentCourse].video)}
             </div>
             <div className="relative">
-              <Button onClick={handleComplete} className="w-full">
+              <Button onClick={handleComplete} className="w-full bg-indigo-600 hover:bg-indigo-700">
                 Mark as Completed
               </Button>
               {showCheckAnimation && (
@@ -516,20 +523,20 @@ function CoursePlatformContent() {
         ) : showShortVideo ? (
           <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
             <div className="relative w-full h-full">
-            <iframe
+              <iframe
                 className="w-full h-full object-cover"
                 src={shorts[currentShort].video}
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen
               ></iframe>
-            <div 
-              className="absolute inset-0"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              style={{ zIndex: 10 }}
-            >
+              <div 
+                className="absolute inset-0"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ zIndex: 10 }}
+              >
               </div>
               <div className="absolute top-4 right-4" style={{ zIndex: 11 }}>
                 <Button variant="ghost" onClick={() => setShowShortVideo(false)}>
@@ -548,38 +555,57 @@ function CoursePlatformContent() {
             {modules.map((moduleItem, moduleIndex) => (
               <div key={moduleIndex} className="mb-8">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold">{moduleItem.title}</h2>
-                  <ChevronRight className="h-6 w-6" />
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-indigo-400 font-sans tracking-tight">{moduleItem.title}</h2>
+                  <Button 
+                    onClick={() => {
+                      setCurrentModule(moduleIndex)
+                      setShowVideo(false)
+                    }} 
+                    className="bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    View Module
+                  </Button>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {moduleItem.courses.map((course, courseIndex) => (
-                    <div
-                      key={courseIndex}
-                      className="bg-card rounded-lg overflow-hidden shadow-sm cursor-pointer"
-                      onClick={() => {
-                        setCurrentModule(moduleIndex)
-                        setCurrentCourse(courseIndex)
-                        setShowVideo(true)
-                      }}
+                {currentModule === moduleIndex && (
+                  <div className="space-y-4">
+                    <motion.div
+                      className="bg-gray-800 rounded-lg p-4"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${getModuleProgress(moduleIndex)}%` }}
+                      transition={{ duration: 1 }}
                     >
-                      <div className="relative aspect-video">
-                        <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                          <Play className="h-8 w-8 text-white" />
-                        </div>
-                        {completedCourses[moduleIndex]?.includes(courseIndex) && (
-                          <div className="absolute top-2 right-2 bg-green-500 rounded-full p-1">
-                            <Check className="h-4 w-4 text-white" />
+                      <span className="text-white font-bold">{Math.round(getModuleProgress(moduleIndex))}% Complete</span>
+                    </motion.div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                      {moduleItem.courses.map((course, courseIndex) => (
+                        <div
+                          key={courseIndex}
+                          className="bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transform hover:scale-105 transition-all duration-300"
+                          onClick={() => {
+                            setCurrentCourse(courseIndex)
+                            setShowVideo(true)
+                          }}
+                        >
+                          <div className="relative aspect-video">
+                            <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                              <Play className="h-8 w-8 text-white" />
+                            </div>
+                            {completedCourses[moduleIndex]?.includes(courseIndex) && (
+                              <div className="absolute top-2 right-2 bg-green-500 rounded-full p-1">
+                                <Check className="h-4 w-4 text-white" />
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                      <div className="p-2">
-                        <h3 className="font-semibold text-sm">{course.title}</h3>
-                        <p className="text-xs text-muted-foreground">{course.duration}</p>
-                      </div>
+                          <div className="p-2">
+                            <h3 className="font-semibold text-sm text-gray-300 font-sans">{course.title}</h3>
+                            <p className="text-xs text-gray-400">{course.duration}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             ))}
             {renderShorts()}
@@ -588,15 +614,15 @@ function CoursePlatformContent() {
           renderAllShorts()
         ) : activeTab === 'Tasks ☑️' ? (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold mb-4">Tasks</h2>
+            <h2 className="text-2xl font-bold mb-4 text-indigo-400 font-sans tracking-tight sm:text-xl">Tasks</h2>
             {modules.map((moduleItem, moduleIndex) => (
-              <div key={moduleIndex} className="bg-card p-4 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">{moduleItem.title}</h3>
+              <div key={moduleIndex} className="bg-gray-800 p-4 rounded-lg">
+                <h3 className="text-xl font-bold mb-2 text-indigo-300 font-sans tracking-tight sm:text-lg">{moduleItem.title}</h3>
                 <ul className="space-y-2">
                   {moduleItem.tasks.map((task, taskIndex) => (
                     <li key={taskIndex} className="flex items-center space-x-2">
                       <Checkbox id={`task-${moduleIndex}-${taskIndex}`} />
-                      <label htmlFor={`task-${moduleIndex}-${taskIndex}`} className="text-sm">
+                      <label htmlFor={`task-${moduleIndex}-${taskIndex}`} className="text-sm text-gray-300">
                         {task.title}
                       </label>
                     </li>
@@ -607,21 +633,28 @@ function CoursePlatformContent() {
           </div>
         ) : activeTab === 'My Progress ⏳' ? (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold mb-4">My Progress</h2>
-            <Progress value={progress} className="w-full" />
-            <p className="text-center text-lg font-semibold">{Math.round(progress)}% Complete</p>
+            <h2 className="text-2xl font-bold mb-4 text-indigo-400 font-sans tracking-tight sm:text-xl">My Progress</h2>
+            <Progress value={progress} className="w-full bg-gray-700" />
+            <p className="text-center text-lg font-semibold text-indigo-300">{Math.round(progress)}% Complete</p>
             {modules.map((moduleItem, moduleIndex) => (
-              <div key={moduleIndex} className="bg-card p-4 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">{moduleItem.title}</h3>
+              <div key={moduleIndex} className="bg-gray-800 p-4 rounded-lg">
+                <h3 className="text-xl font-bold mb-2 text-indigo-300 font-sans tracking-tight sm:text-lg">{moduleItem.title}</h3>
+                <motion.div
+                  className="bg-indigo-600 h-2 rounded-full mb-2"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${getModuleProgress(moduleIndex)}%` }}
+                  transition={{ duration: 1 }}
+                />
+                <p className="text-sm text-gray-400 mb-2">{Math.round(getModuleProgress(moduleIndex))}% Complete</p>
                 <ul className="space-y-2">
                   {moduleItem.courses.map((course, courseIndex) => (
                     <li key={courseIndex} className="flex items-center space-x-2">
                       {completedCourses[moduleIndex]?.includes(courseIndex) ? (
                         <Check className="h-5 w-5 text-green-500" />
                       ) : (
-                        <div className="h-5 w-5 border border-muted-foreground rounded-full" />
+                        <div className="h-5 w-5 border border-gray-600 rounded-full" />
                       )}
-                      <span>{course.title}</span>
+                      <span className="text-gray-300">{course.title}</span>
                     </li>
                   ))}
                 </ul>
@@ -632,7 +665,7 @@ function CoursePlatformContent() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="sticky bottom-0 bg-background border-t bg-white text-black">
+      <nav className="sticky bottom-0 bg-gray-800 border-t border-gray-700">
         <div className="flex justify-around py-2">
           {[
             { icon: Home, label: 'Home 🏠' },
@@ -643,7 +676,7 @@ function CoursePlatformContent() {
             <Button
               key={index}
               variant="ghost"
-              className="flex flex-col items-center"
+              className="flex flex-col items-center text-gray-400 hover:text-indigo-400"
               onClick={() => {
                 setActiveTab(item.label)
                 setShowVideo(false)
