@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Search, Home, BookOpen, CheckSquare, BarChart2, ChevronRight, Play, Check, X } from 'lucide-react'
+import { Search, Home, BookOpen, CheckSquare, BarChart2, ChevronRight, ChevronDown, Play, Check, X } from 'lucide-react'
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import { useSession, signIn, signOut } from "next-auth/react"
@@ -25,12 +25,15 @@ interface CustomSession extends Session {
 
 const modules = [
   {
-    title: 'Módulo 1: Fundamentos',
+    title: 'Módulo 1: Como a Internet Funciona?',
     courses: [
-      { title: 'Aula #001 → Expectativas Módulo 1', duration: '03:46', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1016276753?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'Aula #002 → O que é a internet?', duration: '13:57', image: '/thumb.jpg', video: 'https://player.vimeo.com/video/1016265764?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'Aula #003 → Tecnologias por trás da internet', duration: '23:43', image: '/ferramentas.jpg', video: 'https://player.vimeo.com/video/1016265897?badge=0&amp;autopause=0&amp;player_id=0&amp' },
-      { title: 'Aula #004 → Banda e Latência', duration: '05:13', image: '/vídeo.png', video: 'https://player.vimeo.com/video/1016266097?badge=0&amp;autopause=0&amp' },
+      { title: 'Aula #01 - O que é esperado aqui nesse módulo? Qual a expectativa?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016265685?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #02 - O que é a internet?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016265764?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #03 - Tecnologias por trás da internet', image: '/m1.png', video: 'https://player.vimeo.com/video/1016265897?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #04 - Banda e Latência', image: '/m1.png', video: 'https://player.vimeo.com/video/1016266097?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #05 - Web além do endereço de browser', image: '/m1.png', video: 'https://player.vimeo.com/video/1016266177?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #06 (Prática) - DNS na prática com Google DNS', image: '/m1.png', video: 'https://player.vimeo.com/video/1016266528?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #07 (Prática) - Por que é útil saber disso tudo?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016266562?badge=0&amp;autopause=0&amp;player_id=0&amp' },
     ],
     tasks: [
       { title: 'Escolha a ferramenta que você vai documentar seus aprendizados. (Coda, Notion, Trello, Asana são algumas possibilidades)', completed: false },
@@ -40,11 +43,52 @@ const modules = [
     ]
   },
   {
-    title: 'Módulo 02: Em breve',
+    title: 'Módulo 02: Construindo Software',
     courses: [
-      { title: 'Em construção', duration: '10:15', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
-      { title: 'Muito em breve, por aqui', duration: '15:30', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
-      { title: 'Esse será chocante', duration: '20:45', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
+      { title: 'Aula #08 - Introdução Módulo 2', image: '/m2.png', video: 'https://player.vimeo.com/video/1016266732?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #09 - O ciclo de desenvolvimento de software', image: '/m2.png', video: 'https://player.vimeo.com/video/1016266810?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #10 - O projeto que vamos criar do zero', image: '/m2.png', video: 'https://player.vimeo.com/video/1016266955?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #11 - Especificação e refinamento (parte 1)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016267057?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #12 - Especificação e Refinamento (Parte 2)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016807202?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #13 - Configurando o ambiente de desenvolvimento (parte 01)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016267183?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #14 - Configurando o ambiente de desenvolvimento (parte 02)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016267548?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #15 - VSCode + Docker', image: '/m2.png', video: 'https://player.vimeo.com/video/1016267999?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #16 - Solucionando bugs na prática', image: '/m2.png', video: 'https://player.vimeo.com/video/1016268288?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #17 - Sistema de Controle de Versão (Parte 01)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016268870?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #18 - Sistema de Controle de Versão (Parte 02)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016269079?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #19 - Testes Automatizados (Parte 01)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016269241?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #20 - Testes Automatizados (Parte 02)', image: '/m2.png', video: 'https://player.vimeo.com/video/1016269463?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #21 - Integração e Implantação', image: '/m2.png', video: 'https://player.vimeo.com/video/1016270242?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #22 - Operação e Manutenção', image: '/m2.png', video: 'https://player.vimeo.com/video/1016270419?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+    ],
+    tasks: [
+      { title: 'Sem tarefas, por enquanto', completed: false },
+      { title: 'Sem tarefas, por enquanto', completed: false },
+    ]
+  },
+  
+  {
+    title: 'Módulo 3: Conceitos de básicos de programação para se tornar um "PM full-stack"',
+    courses: [
+      { title: 'Aula #23 - Pontos importantes em Programação', image: '/m3.png', video: 'https://player.vimeo.com/video/1016270619?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #24 - Você realmente entende o que é "front-end"?', image: '/m3.png', video: 'https://player.vimeo.com/video/1016270903?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #25 - HTML Fundamentos e por que é importante?', image: '/m3.png', video: 'https://player.vimeo.com/video/1016271213?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #26 - HTML Fundamentos II', image: '/m3.png', video: 'https://player.vimeo.com/video/1016271382?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #27 - HTML Fundamentos Final', image: '/m3.png', video: 'https://player.vimeo.com/video/1016271583?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #28 - CSS Parte I', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272033?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #29 - CSS Parte II', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272246?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #30 - CSS Prática I', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272358?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #31 - CSS Prática II', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272479?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #32 - CSS Prática III', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272627?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #33 - CSS Prática IV', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272780?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #34 - JavaScript Parte I', image: '/m3.png', video: 'https://player.vimeo.com/video/1016272918?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #35 - JavaScript Parte II', image: '/m3.png', video: 'https://player.vimeo.com/video/1016273016?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #36 - JavaScript Parte III', image: '/m3.png', video: 'https://player.vimeo.com/video/1016273258?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #37 - JavaScript Parte IV', image: '/m3.png', video: 'https://player.vimeo.com/video/1016273354?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #38 - JavaScript Parte V', image: '/m3.png', video: 'https://player.vimeo.com/video/1016275226?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #39 - JavaScript Parte VI', image: '/m3.png', video: 'https://player.vimeo.com/video/1016276385?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #40 - JavaScript Final', image: '/m3.png', video: 'https://player.vimeo.com/video/1016276541?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #41 - Compartilhamento (Extra)', image: '/m3.png', video: 'https://player.vimeo.com/video/1016276753?badge=0&amp;autopause=0&amp;player_id=0&amp' },
     ],
     tasks: [
       { title: 'Sem tarefas, por enquanto', completed: false },
@@ -52,23 +96,14 @@ const modules = [
     ]
   },
   {
-    title: 'Módulo 03: Mais perto do que você imagina',
+    title: 'Módulo 04: Bancos de Dados',
     courses: [
-      { title: 'Por essa aula, estou ansioso', duration: '25:00', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-      { title: 'Essa daqui, você nem imagina', duration: '18:20', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
-      { title: 'Já essa aula, é muito diferente', duration: '22:10', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
-    ],
-    tasks: [
-      { title: 'Sem tarefas, por enquanto', completed: false },
-      { title: 'Sem tarefas, por enquanto', completed: false },
-    ]
-  },
-  {
-    title: 'Módulo 04: Chegando',
-    courses: [
-      { title: 'Por essa aula, estou ansioso', duration: '25:00', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-      { title: 'Essa daqui, você nem imagina', duration: '18:20', image: '/soon.jpg', video: 'https://player.vimeo.com/video/336265026' },
-      { title: 'Já essa aula, é muito diferente', duration: '22:10', image: '/soon.jpg', video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+      { title: 'Aula #042 - Bancos de Dados, o básico', image: '/m4.png', video: 'https://player.vimeo.com/video/1016276876?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #043 - Tipos de Bancos de Dados I', image: '/m4.png', video: 'https://player.vimeo.com/video/1016276967?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #044 - Tipos de Bancos de Dados II', image: '/m4.png', video: 'https://player.vimeo.com/video/1016277061?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #045 - Modelagem de Dados I', image: '/m4.png', video: 'https://player.vimeo.com/video/1016277311?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #046 - Modelagem de Dados II', image: '/m4.png', video: 'https://player.vimeo.com/video/1016277459?badge=0&amp;autopause=0&amp;player_id=0&amp' },
+      { title: 'Aula #047 - Modelagem de Dados III', image: '/m4.png', video: 'https://player.vimeo.com/video/1016277556?badge=0&amp;autopause=0&amp;player_id=0&amp' },
     ],
     tasks: [
       { title: 'Sem tarefas, por enquanto', completed: false },
@@ -270,7 +305,7 @@ function CoursePlatformContent() {
                 }}>
                   <Play className="h-4 w-4 text-blue-500" />
                   <span className="text-gray-200 font-sans">{course.title}</span>
-                  <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span>
+                  {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
                   {completedCourses[currentModule]?.includes(index) && (
                     <Check className="h-4 w-4 text-green-500" />
                   )}
@@ -289,7 +324,7 @@ function CoursePlatformContent() {
                 }}>
                   <Play className="h-4 w-4 text-blue-500" />
                   <span className="text-gray-200 font-sans">{course.title}</span>
-                  <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span>
+                  {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
                 </li>
               ))}
             </ul>
@@ -421,7 +456,7 @@ function CoursePlatformContent() {
             <div className="p-4">
               <h3 className="font-semibold text-lg text-gray-200 font-sans">{course.title}</h3>
               <p className="text-sm text-gray-400 font-sans">{chapter.title}</p>
-              <p className="text-sm mt-2 text-gray-400 font-sans">{course.duration}</p>
+              {/* <p className="text-sm mt-2 text-gray-400 font-sans">{course.duration}</p> */}
             </div>
           </div>
         </div>
@@ -554,17 +589,20 @@ function CoursePlatformContent() {
             {renderLastUncompletedCourse()}
             {modules.map((moduleItem, moduleIndex) => (
               <div key={moduleIndex} className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-indigo-400 font-sans tracking-tight">{moduleItem.title}</h2>
-                  <Button 
-                    onClick={() => {
-                      setCurrentModule(moduleIndex)
-                      setShowVideo(false)
-                    }} 
-                    className="bg-indigo-600 hover:bg-indigo-700"
-                  >
-                    View Module
-                  </Button>
+                <div 
+                  className="flex items-center justify-between mb-4 bg-gray-800 bg-opacity-50 p-4 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setCurrentModule(currentModule === moduleIndex ? -1 : moduleIndex)
+                    setShowVideo(false)
+                  }}
+                >
+                  <h2 className={`text-lg sm:text-xl md:text-2xl font-bold font-sans tracking-tight ${currentModule === moduleIndex ? 'text-white' : 'text-white text-opacity-80'} ${currentModule === moduleIndex ? '' : 'truncate'} max-w-[70%]`}>
+                    {moduleItem.title}
+                  </h2>
+                  <div className="flex-grow"></div>
+                  <ChevronDown
+                    className={`h-8 w-8 text-white transition-transform duration-200 ml-4 ${currentModule === moduleIndex ? 'transform rotate-180' : ''}`}
+                  />
                 </div>
                 {currentModule === moduleIndex && (
                   <div className="space-y-4">
@@ -599,7 +637,7 @@ function CoursePlatformContent() {
                           </div>
                           <div className="p-2">
                             <h3 className="font-semibold text-sm text-gray-300 font-sans">{course.title}</h3>
-                            <p className="text-xs text-gray-400">{course.duration}</p>
+                            {/* <p className="text-xs text-gray-400">{course.duration}</p> */}
                           </div>
                         </div>
                       ))}
