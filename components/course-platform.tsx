@@ -25,7 +25,7 @@ interface CustomSession extends Session {
 
 const modules = [
   {
-    title: 'Módulo 1: Como a Internet Funciona?',
+    title: 'Módulo 01: Como a Internet Funciona?',
     courses: [
       { title: 'Aula #01 - O que é esperado aqui nesse módulo? Qual a expectativa?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016265685?badge=0&amp;autopause=0&amp;player_id=0&amp' },
       { title: 'Aula #02 - O que é a internet?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016265764?badge=0&amp;autopause=0&amp;player_id=0&amp' },
@@ -36,10 +36,10 @@ const modules = [
       { title: 'Aula #07 (Prática) - Por que é útil saber disso tudo?', image: '/m1.png', video: 'https://player.vimeo.com/video/1016266562?badge=0&amp;autopause=0&amp;player_id=0&amp' },
     ],
     tasks: [
-      { title: 'Escolha a ferramenta que você vai documentar seus aprendizados. (Coda, Notion, Trello, Asana são algumas possibilidades)', completed: false },
-      { title: 'Defina quais ferramentas você vai utilizar repetidamente, aprofunde nelas (Framer, v0.dev, ChatGPT, Google Analytics, Google Search Console, Google Tag Manager, Clarity são algumas delas.', completed: false },
-      { title: 'Reflita sobre "O que é um jogo pra você, e trabalho para os outros?"', completed: false },
-      { title: 'É mais rápido para você colocar algo no ar, ou fazer todas as entrevistas antes?"', completed: false },
+      { title: 'Em breve', completed: false },
+      { title: 'Em breve', completed: false },
+      { title: 'Em breve', completed: false },
+      { title: 'Em breve', completed: false },
     ]
   },
   {
@@ -68,7 +68,7 @@ const modules = [
   },
   
   {
-    title: 'Módulo 3: Conceitos de básicos de programação para se tornar um "PM full-stack"',
+    title: 'Módulo 03: Conceitos de básicos de programação para se tornar um "PM full-stack"',
     courses: [
       { title: 'Aula #23 - Pontos importantes em Programação', image: '/m3.png', video: 'https://player.vimeo.com/video/1016270619?badge=0&amp;autopause=0&amp;player_id=0&amp' },
       { title: 'Aula #24 - Você realmente entende o que é "front-end"?', image: '/m3.png', video: 'https://player.vimeo.com/video/1016270903?badge=0&amp;autopause=0&amp;player_id=0&amp' },
@@ -300,14 +300,16 @@ function CoursePlatformContent() {
             <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Previous in this module:</h3>
             <ul className="space-y-2">
               {previousVideos.map((course, index) => (
-                <li key={index} className="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
+                <li key={index} className="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
                   setCurrentCourse(index)
                 }}>
-                  <Play className="h-4 w-4 text-blue-500" />
-                  <span className="text-gray-200 font-sans">{course.title}</span>
+                  <Play className="h-5 w-5 text-blue-500 flex-shrink-0 mr-2" />
+                  <span className="text-gray-200 font-sans flex-grow truncate">{course.title}</span>
                   {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
-                  {completedCourses[currentModule]?.includes(index) && (
-                    <Check className="h-4 w-4 text-green-500" />
+                  {completedCourses[currentModule]?.includes(index) ? (
+                    <Check className="h-5 w-5 text-green-500 flex-shrink-0 ml-2" />
+                  ) : (
+                    <div className="h-5 w-5 flex-shrink-0 ml-2" /> // Placeholder to maintain consistent spacing
                   )}
                 </li>
               ))}
@@ -319,12 +321,13 @@ function CoursePlatformContent() {
             <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Next in this module:</h3>
             <ul className="space-y-2">
               {nextVideos.map((course, index) => (
-                <li key={index} className="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
+                <li key={index} className="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
                   setCurrentCourse(currentCourse + index + 1)
                 }}>
-                  <Play className="h-4 w-4 text-blue-500" />
-                  <span className="text-gray-200 font-sans">{course.title}</span>
+                  <Play className="h-5 w-5 text-blue-500 flex-shrink-0 mr-2" />
+                  <span className="text-gray-200 font-sans flex-grow truncate">{course.title}</span>
                   {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
+                  <div className="h-5 w-5 flex-shrink-0 ml-2" /> {/* Placeholder to maintain consistent spacing */}
                 </li>
               ))}
             </ul>
@@ -431,36 +434,38 @@ function CoursePlatformContent() {
     )
   }
 
-  const renderLastUncompletedCourse = () => {
-    if (lastUncompletedCourse) {
-      const { moduleIndex, courseIndex } = lastUncompletedCourse
-      const chapter = modules[moduleIndex]
-      const course = chapter.courses[courseIndex]
-      return (
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Continue de onde parou</h2>
-          <div
-            className="bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
-            onClick={() => {
-              setCurrentModule(moduleIndex)
-              setCurrentCourse(courseIndex)
-              setShowVideo(true)
-            }}
-          >
-            <div className="relative aspect-video">
-              <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <Play className="h-12 w-12 text-white" />
+  const renderNextUncompletedCourse = () => {
+    for (let moduleIndex = 0; moduleIndex < modules.length; moduleIndex++) {
+      const chapter = modules[moduleIndex];
+      for (let courseIndex = 0; courseIndex < chapter.courses.length; courseIndex++) {
+        if (!completedCourses[moduleIndex]?.includes(courseIndex)) {
+          const course = chapter.courses[courseIndex];
+          return (
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Continue de onde parou</h2>
+              <div
+                className="bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-300"
+                onClick={() => {
+                  setCurrentModule(moduleIndex)
+                  setCurrentCourse(courseIndex)
+                  setShowVideo(true)
+                }}
+              >
+                <div className="relative aspect-video">
+                  <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <Play className="h-12 w-12 text-white" />
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-200 font-sans">{course.title}</h3>
+                  <p className="text-sm text-gray-400 font-sans">{chapter.title}</p>
+                </div>
               </div>
             </div>
-            <div className="p-4">
-              <h3 className="font-semibold text-lg text-gray-200 font-sans">{course.title}</h3>
-              <p className="text-sm text-gray-400 font-sans">{chapter.title}</p>
-              {/* <p className="text-sm mt-2 text-gray-400 font-sans">{course.duration}</p> */}
-            </div>
-          </div>
-        </div>
-      )
+          )
+        }
+      }
     }
     return null
   }
@@ -515,8 +520,8 @@ function CoursePlatformContent() {
           <h1 className="text-2xl font-bold text-indigo-400 font-sans">SBC</h1>
           <div className="flex-1 mx-4">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <Input className="pl-8 w-full bg-gray-700 text-gray-200 border-gray-600" placeholder="Search" />
+              {/* <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
+              {/* <Input className="pl-8 w-full bg-gray-700 text-gray-200 border-gray-600" placeholder="Search" /> */}
             </div>
           </div>
           {session ? (
@@ -586,9 +591,9 @@ function CoursePlatformContent() {
           </div>
         ) : activeTab === 'Home 🏠' ? (
           <>
-            {renderLastUncompletedCourse()}
+            {renderNextUncompletedCourse()}
             {modules.map((moduleItem, moduleIndex) => (
-              <div key={moduleIndex} className="mb-8">
+              <div key={moduleIndex} className="mb-4">
                 <div 
                   className="flex items-center justify-between mb-4 bg-gray-800 bg-opacity-50 p-4 rounded-lg cursor-pointer"
                   onClick={() => {
@@ -607,12 +612,12 @@ function CoursePlatformContent() {
                 {currentModule === moduleIndex && (
                   <div className="space-y-4">
                     <motion.div
-                      className="bg-gray-800 rounded-lg p-4"
+                      className="bg-blue-900 rounded-lg p-1"
                       initial={{ width: 0 }}
                       animate={{ width: `${getModuleProgress(moduleIndex)}%` }}
                       transition={{ duration: 1 }}
                     >
-                      <span className="text-white font-bold">{Math.round(getModuleProgress(moduleIndex))}% Complete</span>
+                      <span className="text-white font-bold">{Math.round(getModuleProgress(moduleIndex))}% Concluído</span>
                     </motion.div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                       {moduleItem.courses.map((course, courseIndex) => (
@@ -671,14 +676,21 @@ function CoursePlatformContent() {
           </div>
         ) : activeTab === 'My Progress ⏳' ? (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold mb-4 text-indigo-400 font-sans tracking-tight sm:text-xl">My Progress</h2>
-            <Progress value={progress} className="w-full bg-gray-700" />
-            <p className="text-center text-lg font-semibold text-indigo-300">{Math.round(progress)}% Complete</p>
+            <h2 className="text-2xl font-bold mb-4 text-white font-sans tracking-tight sm:text-xl">My Progress</h2>
+            <div className="bg-gray-800 p-4 rounded-lg mb-6">
+              <motion.div
+                className="bg-indigo-500 h-4 rounded-full mb-2"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 1 }}
+              />
+              <p className="text-center text-lg font-semibold text-gray-400">{Math.round(progress)}% do curso concluído</p>
+            </div>
             {modules.map((moduleItem, moduleIndex) => (
               <div key={moduleIndex} className="bg-gray-800 p-4 rounded-lg">
                 <h3 className="text-xl font-bold mb-2 text-indigo-300 font-sans tracking-tight sm:text-lg">{moduleItem.title}</h3>
                 <motion.div
-                  className="bg-indigo-600 h-2 rounded-full mb-2"
+                  className="bg-green-300 h-2 rounded-full mb-2"
                   initial={{ width: 0 }}
                   animate={{ width: `${getModuleProgress(moduleIndex)}%` }}
                   transition={{ duration: 1 }}
@@ -686,13 +698,15 @@ function CoursePlatformContent() {
                 <p className="text-sm text-gray-400 mb-2">{Math.round(getModuleProgress(moduleIndex))}% Complete</p>
                 <ul className="space-y-2">
                   {moduleItem.courses.map((course, courseIndex) => (
-                    <li key={courseIndex} className="flex items-center space-x-2">
-                      {completedCourses[moduleIndex]?.includes(courseIndex) ? (
-                        <Check className="h-5 w-5 text-green-500" />
-                      ) : (
-                        <div className="h-5 w-5 border border-gray-600 rounded-full" />
-                      )}
-                      <span className="text-gray-300">{course.title}</span>
+                    <li key={courseIndex} className="flex items-center">
+                      <div className="w-6 h-6 flex-shrink-0 mr-2">
+                        {completedCourses[moduleIndex]?.includes(courseIndex) ? (
+                          <Check className="h-6 w-6 text-green-500" />
+                        ) : (
+                          <div className="h-6 w-6 border border-gray-600 rounded-full" />
+                        )}
+                      </div>
+                      <span className="text-gray-300 flex-grow">{course.title}</span>
                     </li>
                   ))}
                 </ul>
