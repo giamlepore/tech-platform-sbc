@@ -486,7 +486,7 @@ function CoursePlatformContent() {
           <div className="bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between transform hover:scale-105">
             <div>
               <h2 className="text-2xl font-semibold mb-4">Technical Product Manager Training</h2>
-              <p className="text-gray-400 mb-4">Access your personalized course content and track your progress.</p>
+              <p className="text-gray-400 mb-4">O curso mais completo do Brasil no caminho para um Technical PM.</p>
             </div>
             <Button 
               onClick={() => signIn('google')} 
@@ -498,7 +498,7 @@ function CoursePlatformContent() {
           <div className="bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between transform hover:scale-105">
             <div>
               <h2 className="text-2xl font-semibold mb-4">Como criar um produto do zero, sem sorte</h2>
-              <p className="text-gray-400 mb-4">Explore our course offerings and get a sneak peek of what's inside.</p>
+              <p className="text-gray-400 mb-4">Projeto paralelo ou criando produtos do zero em empresas? Esse é o caminho.</p>
             </div>
             <Button 
               onClick={() => window.location.href = 'https://sbc-v6.vercel.app'}
@@ -517,7 +517,7 @@ function CoursePlatformContent() {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
         <div className="flex items-center justify-between px-4 py-2">
-          <h1 className="text-2xl font-bold text-indigo-400 font-sans">SBC</h1>
+          <h1 className="text-2xl font-bold text-white text-opacity-80 font-sans">SBC</h1>
           <div className="flex-1 mx-4">
             <div className="relative">
               {/* <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
