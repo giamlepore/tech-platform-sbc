@@ -295,6 +295,23 @@ function CoursePlatformContent() {
     
     return (
       <div className="mt-6 space-y-6">
+        {nextVideos.length > 0 && (
+          <div>
+            <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Next in this module:</h3>
+            <ul className="space-y-2">
+              {nextVideos.map((course, index) => (
+                <li key={index} className="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
+                  setCurrentCourse(currentCourse + index + 1)
+                }}>
+                  <Play className="h-5 w-5 text-blue-500 flex-shrink-0 mr-2" />
+                  <span className="text-gray-200 font-sans flex-grow truncate">{course.title}</span>
+                  {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
+                  <div className="h-5 w-5 flex-shrink-0 ml-2" /> {/* Placeholder to maintain consistent spacing */}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         {previousVideos.length > 0 && (
           <div>
             <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Previous in this module:</h3>
@@ -311,23 +328,6 @@ function CoursePlatformContent() {
                   ) : (
                     <div className="h-5 w-5 flex-shrink-0 ml-2" /> // Placeholder to maintain consistent spacing
                   )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {nextVideos.length > 0 && (
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-gray-200 font-sans">Next in this module:</h3>
-            <ul className="space-y-2">
-              {nextVideos.map((course, index) => (
-                <li key={index} className="flex items-center p-2 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors duration-300" onClick={() => {
-                  setCurrentCourse(currentCourse + index + 1)
-                }}>
-                  <Play className="h-5 w-5 text-blue-500 flex-shrink-0 mr-2" />
-                  <span className="text-gray-200 font-sans flex-grow truncate">{course.title}</span>
-                  {/* <span className="text-sm text-gray-400 ml-auto font-sans">{course.duration}</span> */}
-                  <div className="h-5 w-5 flex-shrink-0 ml-2" /> {/* Placeholder to maintain consistent spacing */}
                 </li>
               ))}
             </ul>
