@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Plataforma Tech for VCs (SBC)",
-  description: "Acesse a plataforma Tech for VCs aqui.",
+  title: "Plataforma Tech for PMs (SBC)",
+  description: "Acesse a plataforma Tech for PMs aqui.",
 };
 
 export default function RootLayout({

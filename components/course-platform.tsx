@@ -689,7 +689,7 @@ function CoursePlatformContent() {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
         <div className="flex items-center justify-between px-4 py-2">
-          <h1 className="text-2xl font-bold text-white text-opacity-80 font-sans">SBC | Tech for VCs</h1>
+          <h1 className="text-2xl font-bold text-white text-opacity-80 font-sans">SBC</h1>
           <div className="flex-1 mx-4">
             <div className="relative">
               {/* <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
